@@ -1,0 +1,26 @@
+{
+	"name": "jl-node-app",
+	"version": "1.0.0",
+	"description": "James' node app",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "nodemon server/app.js"
+	},
+	"engine": {
+		"node": "^10.4.1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/lc512k/jl-node-app.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/lc512k/jl-node-app/issues"
+	},
+	"homepage": "https://github.com/lc512k/jl-node-app#readme",
+	"dependencies": {
+		"express": "^4.16.3",
+		"nodemon": "^1.17.5"
+	}
+}
