@@ -21,6 +21,8 @@
 	"homepage": "https://github.com/lc512k/jl-node-app#readme",
 	"dependencies": {
 		"express": "^4.16.3",
-		"nodemon": "^1.17.5"
+		"express-handlebars": "^3.0.0",
+		"nodemon": "^1.17.5",
+		"path": "^0.12.7"
 	}
 }
