@@ -1,6 +1,5 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
-const path = require('path');
 
 const someController = require('./controllers/some-controller');
 const anotherController = require('./controllers/another-controller');
@@ -12,19 +11,14 @@ const postWorldCupResult = require('./controllers/post-world-cup-result-controll
 // Initializes a barebones express app
 const app = new express();
 
-// Set paths for views
-// https://www.npmjs.com/package/path
-app.set('views', path.join(__dirname, '/views'));
-
 // Sets up Handlebars for templating
 // https://github.com/ericf/express-handlebars
-app.engine('hbs', handlebars({
-		defaultLayout: 'main',
-		extname: '.hbs',
-		layoutsDir: path.join(__dirname, 'views/layouts/')
-	}
-));
-app.set('view engine', 'hbs');
+const handlebarsInstance = handlebars.create({ 
+	extname: '.html'
+});
+app.engine('html', handlebarsInstance.engine);
+app.set('view engine', '.html');
+app.set('views', 'server/views/'); // without this it will look in root folder
 
 // Declares a GET endpoint
 // visiting http://localhost:5555/ in the browser will trigger this code
