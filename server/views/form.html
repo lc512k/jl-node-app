@@ -1,0 +1,19 @@
+<h1>{{pageTitle}}</h1>
+
+<p>{{formDetails}}</p>
+
+<form action="{{formURL}}" method="post">
+	<label for="name">Your name:</label>
+	<input type="text" name="name" id="name" placeholder="John Doe">
+
+	<label for="email">Your email:</label>
+	<input type="email" name="email" id="email" placeholder="john.doe@email.com">
+
+	<label for="country">Who do you think will win the World Cup?</label>
+	<input type="text" name="country" id="country" placeholder="It won't be England">
+
+	<label for="gdpr">GDPR disclaimer</label>
+	<input type="checkbox" name="gdpr" id="gdpr" value="Yes" required>
+
+	<button>Submit</button>
+</form>
