@@ -1,5 +1,6 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
+const mongoose = require('mongoose');
 
 const someController = require('./controllers/some-controller');
 const anotherController = require('./controllers/another-controller');
