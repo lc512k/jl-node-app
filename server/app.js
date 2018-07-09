@@ -1,7 +1,7 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+const mongodb = require('./libs/mongodb');
 
 const someController = require('./controllers/some-controller');
 const anotherController = require('./controllers/another-controller');
@@ -59,6 +59,12 @@ app.post('/form-submit', postForm);
 // The app will be running to http://localhost:5555
 const port = process.env.PORT || 5555;
 
-app.listen(port, () => {
-	console.log('app listening on', port);
-});
+const watch = mongodb
+	.then(() => {
+		app.listen(port, () => {
+			console.log('\n App listening on port:', port, '\n');
+		});
+	}).catch(error => {
+		throw new Error(error);
+	});
+module.exports = { watch };
