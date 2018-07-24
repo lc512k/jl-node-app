@@ -1,5 +1,7 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
+const bodyParser = require('body-parser');
+const mongodb = require('./libs/mongodb');
 
 const someController = require('./controllers/some-controller');
 const anotherController = require('./controllers/another-controller');
@@ -7,6 +9,9 @@ const anotherController = require('./controllers/another-controller');
 // James' controllers
 const getWorldCupResult = require('./controllers/get-world-cup-result-controller');
 const postWorldCupResult = require('./controllers/post-world-cup-result-controller');
+// Form controllers
+const getForm = require('./controllers/get-form-controller');
+const postForm = require('./controllers/post-form-controller');
 
 // Initializes a barebones express app
 const app = new express();
@@ -19,6 +24,9 @@ const handlebarsInstance = handlebars.create({
 app.engine('html', handlebarsInstance.engine);
 app.set('view engine', '.html');
 app.set('views', 'server/views/'); // without this it will look in root folder
+
+// Body Parser
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Declares a GET endpoint
 // visiting http://localhost:5555/ in the browser will trigger this code
@@ -42,12 +50,21 @@ app.post('/another-route', anotherController);
 // James' endpoints
 app.get('/world-cup-result', getWorldCupResult);
 app.post('/world-cup-score', postWorldCupResult);
+// Form
+app.get('/form', getForm);
+app.post('/form-submit', postForm);
 
 // Heroku will assign a random port in the PORT environment variable
 // When running locally, it will use 5555
 // The app will be running to http://localhost:5555
 const port = process.env.PORT || 5555;
 
-app.listen(port, () => {
-	console.log('app listening on', port);
-});
+const watch = mongodb
+	.then(() => {
+		app.listen(port, () => {
+			console.log('\n App listening on port:', port, '\n');
+		});
+	}).catch(error => {
+		throw new Error(error);
+	});
+module.exports = { watch };
