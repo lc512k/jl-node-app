@@ -2,6 +2,7 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongodb = require('./libs/mongodb');
+require('dotenv').config();
 
 const someController = require('./controllers/some-controller');
 const anotherController = require('./controllers/another-controller');
@@ -12,6 +13,9 @@ const postWorldCupResult = require('./controllers/post-world-cup-result-controll
 // Form controllers
 const getForm = require('./controllers/get-form-controller');
 const postForm = require('./controllers/post-form-controller');
+
+// FT API Controllers
+const getHeadlines = require('./controllers/get-ft-headlines');
 
 // Initializes a barebones express app
 const app = new express();
@@ -53,6 +57,9 @@ app.post('/world-cup-score', postWorldCupResult);
 // Form
 app.get('/form', getForm);
 app.post('/form-submit', postForm);
+
+// FT API
+app.get('/headlines', getHeadlines);
 
 // Heroku will assign a random port in the PORT environment variable
 // When running locally, it will use 5555
