@@ -1,25 +1,31 @@
 const main = (req, res) => {
 
 	// process.env.FT_API = key
-	const request = require('request');
-	const options = {
-		uri: 'http://api.ft.com/content/search/v1',
-		qs: {
-			'X-Api-Key': process.env.FT_API,
-			'Content-Type': 'application/x-www-form-urlencoded',
-			query: 'Something'
+	const fetch = require('isomorphic-fetch');
+	let options = {
+		method: 'POST',
+		body: {
+			'queryString': 'banks',
+			'resultContext': {
+				'aspects': ['title', 'lifecycle', 'location', 'summary', 'editorial']
+			}
 		},
-	}
-
-	request(options, (err, res, body) => {
-		if (err) {
-			console.log(err);
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'X-Api-Key': process.env.FT_API,
 		}
-		console.log(body);
+	};
+
+	fetch('http://api.ft.com/content/search/v1', options)
+	.then((res) => {
+		console.log('🔔 =>', res);
+	})
+	.catch((error) => {
+		throw new Error(error);
 	});
 
 	res.render('headlines', {
-		
+
 	});
 
 };
