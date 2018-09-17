@@ -1,9 +1,5 @@
 const main = (req, res) => {
 	const { name, email, country, gdpr } = req.body;
-	console.log('name:', name);
-	console.log('email:', email);
-	console.log('country:', country);
-	console.log('gdpr:', gdpr);
 
 	const formData = require('./../models/form');
 	const newFormInput = new formData({

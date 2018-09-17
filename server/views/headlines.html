@@ -1,17 +1,16 @@
+<h1>{{pageTitle}}</h1>
 <ul class="headlines">
-	<h1>{{pageTitle}}</h1>
-	{{#each headline}}
+	{{#each results}}
 	<li class="headline__item">
 		<h2 class="headline__title">
-			<a href="{{headlineURL}}">
-				{{headlineTitle}}
+			<a href="{{this.location.uri}}">
+				{{this.title.title}}
 			</a>
 		</h2>
-		<img class="headline__image" src="{{headlineImage}}" alt="{{headlineImageAlt}}">
 		<p class="headline__blurb">
-			{{headlineBlurb}}
+			{{this.summary.excerpt}}
 		</p>
-		<a href="{{headlineURL}}">
+		<a href="{{this.location.uri}}">
 			Read more&hellip;
 		</a>
 	</li>

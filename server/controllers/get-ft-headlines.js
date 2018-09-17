@@ -7,11 +7,11 @@ const main = (req, res) => {
 		headers: {
 			'X-Api-Key': process.env.FT_API,
 			'Content-Type': 'application/json',
-			// 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 		},
 		body: JSON.stringify({
-			'queryString': 'banks',
+			'queryString': 'Trump',
 			'resultContext': {
+				'maxResults': 10,
 				'aspects': ['title', 'lifecycle', 'location', 'summary', 'editorial']
 			}
 		})
@@ -22,16 +22,20 @@ const main = (req, res) => {
 		if (res.status === 400) {
 			throw new Error(res.status + ' - ' + res.statusText);
 		}
-		console.log('🔔 ', res);
+		const resBody = res.json();
+		return resBody;
+	})
+	.then((resBody) => {
+		const results = resBody.results[0].results;
+	
+		res.render('headlines', {
+			pageTitle: 'Hello Headlines',
+			results: results,
+		});
 	})
 	.catch((error) => {
 		console.log('⛔️ ', error);
 	});
-	
-	res.render('headlines', {
-
-	});
-
 };
 
 module.exports = main;
