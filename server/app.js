@@ -23,11 +23,15 @@ const app = new express();
 // Sets up Handlebars for templating
 // https://github.com/ericf/express-handlebars
 const handlebarsInstance = handlebars.create({ 
-	extname: '.html'
+	extname: '.html',
+	defaultLayout: 'main'
+
 });
 app.engine('html', handlebarsInstance.engine);
 app.set('view engine', '.html');
-app.set('views', 'server/views/'); // without this it will look in root folder
+
+// Static files
+app.use(express.static('public'));
 
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: true }));

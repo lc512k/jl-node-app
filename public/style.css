@@ -1,0 +1,10 @@
+.headlines {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.headline__item {
+	margin: 10px 0;
+	border: 2px solid black;
+}
