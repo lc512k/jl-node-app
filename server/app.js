@@ -2,6 +2,7 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongodb = require('./libs/mongodb');
+require('dotenv').config();
 
 const someController = require('./controllers/some-controller');
 const anotherController = require('./controllers/another-controller');
@@ -13,17 +14,24 @@ const postWorldCupResult = require('./controllers/post-world-cup-result-controll
 const getForm = require('./controllers/get-form-controller');
 const postForm = require('./controllers/post-form-controller');
 
+// FT API Controllers
+const getHeadlines = require('./controllers/get-ft-headlines');
+
 // Initializes a barebones express app
 const app = new express();
 
 // Sets up Handlebars for templating
 // https://github.com/ericf/express-handlebars
 const handlebarsInstance = handlebars.create({ 
-	extname: '.html'
+	extname: '.html',
+	defaultLayout: 'main'
+
 });
 app.engine('html', handlebarsInstance.engine);
 app.set('view engine', '.html');
-app.set('views', 'server/views/'); // without this it will look in root folder
+
+// Static files
+app.use(express.static('public'));
 
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -53,6 +61,9 @@ app.post('/world-cup-score', postWorldCupResult);
 // Form
 app.get('/form', getForm);
 app.post('/form-submit', postForm);
+
+// FT API
+app.get('/headlines', getHeadlines);
 
 // Heroku will assign a random port in the PORT environment variable
 // When running locally, it will use 5555
