@@ -1,0 +1,18 @@
+<h1>{{pageTitle}}</h1>
+<ul class="headlines">
+	{{#each results}}
+	<li class="headline__item">
+		<h2 class="headline__title">
+			<a href="{{this.location.uri}}">
+				{{this.title.title}}
+			</a>
+		</h2>
+		<p class="headline__blurb">
+			{{this.summary.excerpt}}
+		</p>
+		<a href="{{this.location.uri}}">
+			Read more&hellip;
+		</a>
+	</li>
+	{{/each}}
+</ul>

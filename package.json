@@ -21,8 +21,10 @@
 	"homepage": "https://github.com/lc512k/jl-node-app#readme",
 	"dependencies": {
 		"body-parser": "^1.18.3",
+		"dotenv": "^6.0.0",
 		"express": "^4.16.3",
 		"express-handlebars": "^3.0.0",
+		"isomorphic-fetch": "^2.2.1",
 		"mongoose": "^5.2.1",
 		"nodemon": "^1.17.5"
 	}
